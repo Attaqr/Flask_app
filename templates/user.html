@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo List</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/styles2.css">
+
+</head>
+<body>
+  <ul class="nav-links">
+    <li><a href="/user">Dashboard</a></li>
+    <li class="center"><a href="/login">Login</a></li>
+    <li class="upward"><a href="/">Home</a></li>
+    <li class="forward"><a href="/logout">Logout</a></li>
+  </ul>
+
+  <div class="container">
+    <form id="taskForm" action="/add" method="POST">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Add a new task" name="task">
+      </div>
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-primary btn-block" type="submit">Add</button>
+        </div>
+      </div>
+    </form>
+    <h1 class="welcome">Welcome, {{ username }}!</h1>
+
+    <ul class="task-list">
+      {% for task in tasks %}
+        <li>
+          {{ task[0] }}
+          <form action="/delete" method="POST" style="display: inline;">
+            <input type="hidden" name="task_id" value="{{ task[0] }}">
+            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+</body>
+</html>
